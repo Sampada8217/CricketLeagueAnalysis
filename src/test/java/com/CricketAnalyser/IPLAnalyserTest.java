@@ -87,8 +87,17 @@ public class IPLAnalyserTest {
             String sortedSRWith6sAnd4s = iplAnalyser.getSRWiseSortingWith6sAnd4sOnData();
             IPLRunCSV[] iplRunCSV = new Gson().fromJson(sortedSRWith6sAnd4s, IPLRunCSV[].class);
             Assert.assertEquals("Ishant Sharma", iplRunCSV[0].player);
-        } catch (IPLAnalyserException e) {
-        }
+        } catch (IPLAnalyserException e) { }
+    }
+    @Test
+    public void givenIPLSheet_whenSortedOnAveragesWithStrikingRate_shouldReturnBestCricketerName() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            iplAnalyser.loadCSVData(IPL_FACT_SHEET_FILE_PATH);
+            String sortedAvgWithSR = iplAnalyser.getAverageWiseSortingWithSROnData();
+            IPLRunCSV[] iplRunCSV = new Gson().fromJson(sortedAvgWithSR, IPLRunCSV[].class);
+            Assert.assertEquals("MS Dhoni", iplRunCSV[0].player);
+        } catch (IPLAnalyserException e) { }
     }
 }
 

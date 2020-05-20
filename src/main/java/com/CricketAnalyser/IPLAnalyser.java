@@ -139,18 +139,31 @@ public class IPLAnalyser {
         String sortedSRData = new Gson().toJson(iplRunDAOS);
         return sortedSRData;
     }
+
+    public String getBowlingAverageWiseSortingOnData() throws IPLAnalyserException {
+        if (iplDAOMap == null || iplDAOMap.size() == 0) {
+            throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<IPLCSVDAO> sortAvgComparator = Comparator.comparing(census -> census.avg);
+        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
+        this.sortByDescending(iplRunDAOS, sortAvgComparator);
+        String sortedSRData = new Gson().toJson(iplRunDAOS);
+        return sortedSRData;
+
+    }
     private void sortByDescending(List<IPLCSVDAO> iplRunDAOS, Comparator<IPLCSVDAO> censusComparator) {
         for (int i = 0; i < iplRunDAOS.size() - 1; i++) {
             for (int j = 0; j < iplRunDAOS.size() - i - 1; j++) {
-                IPLCSVDAO census1 = iplRunDAOS.get(j);
-                IPLCSVDAO census2 = iplRunDAOS.get(j + 1);
-                if (censusComparator.compare(census1, census2) < 0) {
-                    iplRunDAOS.set(j, census2);
-                    iplRunDAOS.set(j + 1, census1);
+                IPLCSVDAO data1 = iplRunDAOS.get(j);
+                IPLCSVDAO data2 = iplRunDAOS.get(j + 1);
+                if (censusComparator.compare(data1, data2) < 0) {
+                    iplRunDAOS.set(j, data2);
+                    iplRunDAOS.set(j + 1, data1);
                 }
             }
         }
     }
+
 }
 
 

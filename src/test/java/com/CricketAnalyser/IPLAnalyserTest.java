@@ -8,8 +8,9 @@ import org.junit.rules.ExpectedException;
 public class IPLAnalyserTest {
     private static final String IPL_FACT_SHEET_FILE_PATH = "./src/test/resources/IPL2019FactsheetMostRuns.csv";
     private static final String IPL_WRONG_FILE_PATH = "./src/main/resources/IPL2019FactsheetMostRuns";
-    private static final String IPL_FACT_SHEET_WICKETS_FILE_PATH="./src/test/resources/IPL2019FactsheetMostWkts.csv";
-    private static final String IPL_FACT_SHEET_WICKET_WRONG_FILE="./src/main/resources/IPL2019FactsheetMostWkts.csv";
+    private static final String IPL_FACT_SHEET_WICKETS_FILE_PATH = "./src/test/resources/IPL2019FactsheetMostWkts.csv";
+    private static final String IPL_FACT_SHEET_WICKET_WRONG_FILE = "./src/main/resources/IPL2019FactsheetMostWkts.csv";
+
     @Test
     public void givenIPLSheet_withCSVFile_shouldReturnCorrectRecords() {
         try {
@@ -92,6 +93,7 @@ public class IPLAnalyserTest {
         }
     }
 
+
     @Test
     public void givenIPLSheet_whenSortedOnAveragesWithStrikingRate_shouldReturnBestCricketerName() {
         try {
@@ -111,8 +113,9 @@ public class IPLAnalyserTest {
             iplAnalyser.loadCSVData(IPL_FACT_SHEET_FILE_PATH);
             String sortedRunsWithAvg = iplAnalyser.getRunsWiseSortingWithAvgOnData();
             IPLRunCSV[] iplRunCSV = new Gson().fromJson(sortedRunsWithAvg, IPLRunCSV[].class);
-            Assert.assertEquals("David Warner ",iplRunCSV[0].player);
-        } catch (IPLAnalyserException e) { }
+            Assert.assertEquals("David Warner ", iplRunCSV[0].player);
+        } catch (IPLAnalyserException e) {
+        }
     }
 
     @Test
@@ -124,18 +127,29 @@ public class IPLAnalyserTest {
         } catch (IPLAnalyserException e) {
         }
     }
+
     @Test
-    public void givenIPLWktsSheet_WithWrongFile_ShouldThrowException() {
+    public void givenIPLWktsSheet_withWrongFile_ShouldThrowException() {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser();
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(IPLAnalyserException.class);
-            iplAnalyser.loadCSVData(IPL_FACT_SHEET_WICKET_WRONG_FILE);
+            iplAnalyser.loadCSVWktsData(IPL_FACT_SHEET_WICKET_WRONG_FILE);
         } catch (IPLAnalyserException e) {
             Assert.assertEquals(IPLAnalyserException.ExceptionType.IPL_FILE_PROBLEM, e.type);
         }
     }
 
+    @Test
+    public void givenIPLWktsSheet_withWrongFile_shouldReturnSortedResult() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            iplAnalyser.loadCSVWktsData(IPL_FACT_SHEET_WICKETS_FILE_PATH);
+            String sortedOnAverages = iplAnalyser.getBowlingAverageWiseSortingOnData();
+            IPLWktsCSV[] iplWktsCSV = new Gson().fromJson(sortedOnAverages, IPLWktsCSV[].class);
+            Assert.assertEquals("Krishnappa Gowtham", iplWktsCSV[0].player);
+        } catch (IPLAnalyserException e) { }
+    }
 }
 
 

@@ -170,6 +170,16 @@ public class IPLAnalyserTest {
             Assert.assertEquals("Ben Cutting", iplRunCSV[0].player);
         } catch (IPLAnalyserException e) { }
     }
+    @Test
+    public void givenIPLWicketsSheet_whenSortedOnSRWith5wAnd4w_shouldReturnSortedResult() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            iplAnalyser.loadCSVWktsData(IPL_FACT_SHEET_WICKETS_FILE_PATH);
+            String sortedBowlingEconData = iplAnalyser.getBowlingSRWiseSortingWith5wAnd4wOnData();
+            IPLRunCSV[] iplRunCSV = new Gson().fromJson(sortedBowlingEconData, IPLRunCSV[].class);
+            Assert.assertEquals("Krishnappa Gowtham", iplRunCSV[0].player);
+        } catch (IPLAnalyserException e) { }
+    }
 }
 
 

@@ -169,6 +169,18 @@ public class IPLAnalyser {
         String sorted4sData = new Gson().toJson(iplRunDAOS);
         return sorted4sData;
     }
+    public String getWicketsWiseSortingWithAvgOnData() throws IPLAnalyserException {
+        if (iplDAOMap == null || iplDAOMap.size() == 0) {
+            throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<IPLCSVDAO> sortWktsComparator = Comparator.comparing(census -> census.wkts);
+        Comparator<IPLCSVDAO> sortAvgComparator = sortWktsComparator.thenComparing(census -> census.avg);
+        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
+        this.sortByDescending(iplRunDAOS, sortAvgComparator);
+        String sortedAvgData = new Gson().toJson(iplRunDAOS);
+        return sortedAvgData;
+
+    }
 
     private void sortByDescending(List<IPLCSVDAO> iplRunDAOS, Comparator<IPLCSVDAO> censusComparator) {
         for (int i = 0; i < iplRunDAOS.size() - 1; i++) {

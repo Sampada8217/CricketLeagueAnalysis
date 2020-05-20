@@ -4,46 +4,46 @@ import com.opencsv.bean.CsvBindByName;
 
 public class IPLRunCSV {
 
-    @CsvBindByName(column = "POS", required = true)
+    @CsvBindByName(column = "POS")
     public int pos;
 
-    @CsvBindByName(column = "PLAYER", required = true)
+    @CsvBindByName(column="PLAYER", required = true)
     public String player;
 
-    @CsvBindByName(column = "Mat", required = true)
+    @CsvBindByName(column = "Mat")
     public int mat;
 
-    @CsvBindByName(column = "Inns", required = true)
+    @CsvBindByName(column = "Inns" )
     public int inns;
 
-    @CsvBindByName(column = "NO", required = true)
+    @CsvBindByName(column = "NO")
     public int no;
 
-    @CsvBindByName(column = "Runs", required = true)
+    @CsvBindByName(column = "Runs")
     public int runs;
 
-    @CsvBindByName(column = "HS", required = true)
+    @CsvBindByName(column = "HS")
     public int hs;
 
-    @CsvBindByName(column = "Avg", required = true)
+    @CsvBindByName(column = "Avg")
     public double avg;
 
-    @CsvBindByName(column = "BF", required = true)
+    @CsvBindByName(column = "BF")
     public int bf;
 
-    @CsvBindByName(column = "SR", required = true)
+    @CsvBindByName(column = "SR")
     public double sr;
 
-    @CsvBindByName(column = "100", required = true)
+    @CsvBindByName(column = "100")
     public int hundred;
 
-    @CsvBindByName(column = "50", required = true)
+    @CsvBindByName(column = "50")
     public int fifty;
 
-    @CsvBindByName(column = "4s", required = true)
+    @CsvBindByName(column = "4s")
     public int four;
 
-    @CsvBindByName(column = "6s", required = true)
+    @CsvBindByName(column = "6s")
     public int six;
 
     public IPLRunCSV() {
@@ -54,7 +54,7 @@ public class IPLRunCSV {
     @Override
     public String toString() {
         return "IPLRunCSV{" +
-                "POS='" + pos + '\'' +
+                " POS='" + pos + '\'' +
                 ",PLAYER ='" + player + '\'' +
                 ",Inns='" + inns + '\'' +
                 ",Mat='" + mat + '\'' +

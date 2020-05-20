@@ -84,6 +84,20 @@ public class IPLAnalyser {
         return sorted6sData;
     }
 
+    public String getSRWiseSortingWith6sAnd4sOnData() throws IPLAnalyserException {
+        if (iplRunDAOMap == null || iplRunDAOMap.size() == 0) {
+            throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<IPLRunCSVDAO> sortSRComparator = Comparator.comparing(census -> census.sr);
+        Comparator<IPLRunCSVDAO> sort6sComparator = sortSRComparator.thenComparing(census -> census.sr);
+        Comparator<IPLRunCSVDAO> sort4sCompartor=sort6sComparator.thenComparing(census->census.four);
+        List<IPLRunCSVDAO> iplRunDAOS = iplRunDAOMap.values().stream().collect(Collectors.toList());
+        this.sortByDescending(iplRunDAOS, sort4sCompartor);
+        String sorted4sData = new Gson().toJson(iplRunDAOS);
+        return sorted4sData;
+    }
+
+
     private void sortByDescending(List<IPLRunCSVDAO> iplRunDAOS,Comparator<IPLRunCSVDAO> censusComparator) {
         for (int i = 0; i < iplRunDAOS.size() - 1; i++) {
             for (int j = 0; j < iplRunDAOS.size() - i - 1; j++) {
@@ -97,6 +111,8 @@ public class IPLAnalyser {
         }
 
     }
+
+
 }
 
 

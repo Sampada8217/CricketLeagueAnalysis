@@ -63,8 +63,10 @@ public class IPLAnalyserTest {
             String sorted6sData = iplAnalyser.get6sWiseSortingOnData();
             IPLRunCSV[] iplRunCSV = new Gson().fromJson(sorted6sData, IPLRunCSV[].class);
             Assert.assertEquals("Andre Russell", iplRunCSV[0].player);
-        } catch (IPLAnalyserException e) { }
+        } catch (IPLAnalyserException e) {
+        }
     }
+
     @Test
     public void givenIPLSheet_whenSortedOn4s_shouldReturnSortedResult() {
         try {
@@ -73,7 +75,20 @@ public class IPLAnalyserTest {
             String sorted4sData = iplAnalyser.get4sWiseSortingOnData();
             IPLRunCSV[] iplRunCSV = new Gson().fromJson(sorted4sData, IPLRunCSV[].class);
             Assert.assertEquals("Shikhar Dhawan", iplRunCSV[0].player);
-        } catch (IPLAnalyserException e) { }
+        } catch (IPLAnalyserException e) {
+        }
+    }
+
+    @Test
+    public void givenIPLSheet_whenSortedOnStrikingRateWith6sAnd4s_shouldReturnBestCricketerName() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            iplAnalyser.loadCSVData(IPL_FACT_SHEET_FILE_PATH);
+            String sortedSRWith6sAnd4s = iplAnalyser.getSRWiseSortingWith6sAnd4sOnData();
+            IPLRunCSV[] iplRunCSV = new Gson().fromJson(sortedSRWith6sAnd4s, IPLRunCSV[].class);
+            Assert.assertEquals("Ishant Sharma", iplRunCSV[0].player);
+        } catch (IPLAnalyserException e) {
+        }
     }
 }
 

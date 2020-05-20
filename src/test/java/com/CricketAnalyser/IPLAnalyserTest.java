@@ -145,7 +145,7 @@ public class IPLAnalyserTest {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser();
             iplAnalyser.loadCSVWktsData(IPL_FACT_SHEET_WICKETS_FILE_PATH);
-            String sortedOnAverages = iplAnalyser.getBowlingAverageWiseSortingOnData();
+            String sortedOnAverages = iplAnalyser.getAverageWiseSortingOnData();
             IPLWktsCSV[] iplWktsCSV = new Gson().fromJson(sortedOnAverages, IPLWktsCSV[].class);
             Assert.assertEquals("Krishnappa Gowtham", iplWktsCSV[0].player);
         } catch (IPLAnalyserException e) { }
@@ -155,7 +155,7 @@ public class IPLAnalyserTest {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser();
             iplAnalyser.loadCSVWktsData(IPL_FACT_SHEET_WICKETS_FILE_PATH);
-            String sortedBowlingSRData = iplAnalyser.getBowlingSRWiseSortingOnData();
+            String sortedBowlingSRData = iplAnalyser.getSRWiseSortingOnData();
             IPLRunCSV[] iplRunCSV = new Gson().fromJson(sortedBowlingSRData, IPLRunCSV[].class);
             Assert.assertEquals("Krishnappa Gowtham", iplRunCSV[0].player);
         } catch (IPLAnalyserException e) { }
@@ -170,7 +170,6 @@ public class IPLAnalyserTest {
             Assert.assertEquals("Ben Cutting", iplRunCSV[0].player);
         } catch (IPLAnalyserException e) { }
     }
-    
 }
 
 

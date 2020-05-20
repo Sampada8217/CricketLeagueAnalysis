@@ -147,27 +147,6 @@ public class IPLAnalyser {
         return sortedSRData;
     }
 
-    public String getBowlingAverageWiseSortingOnData() throws IPLAnalyserException {
-        if (iplDAOMap == null || iplDAOMap.size() == 0) {
-            throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
-        }
-        Comparator<IPLCSVDAO> sortAvgComparator = Comparator.comparing(census -> census.avg);
-        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
-        this.sortByDescending(iplRunDAOS, sortAvgComparator);
-        String sortedSRData = new Gson().toJson(iplRunDAOS);
-        return sortedSRData;
-
-    }
-    public String getBowlingSRWiseSortingOnData() throws IPLAnalyserException {
-        if (iplDAOMap == null || iplDAOMap.size() == 0) {
-            throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
-        }
-        Comparator<IPLCSVDAO> censusCSVComparator = Comparator.comparing(census -> census.sr);
-        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
-        this.sortByDescending(iplRunDAOS, censusCSVComparator);
-        String sortedSRData = new Gson().toJson(iplRunDAOS);
-        return sortedSRData;
-    }
     public String getBowlingEconomyRateWiseSortingOnData() throws IPLAnalyserException {
         if (iplDAOMap == null || iplDAOMap.size() == 0) {
             throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);

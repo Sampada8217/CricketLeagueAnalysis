@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.CricketAnalyser.IPLAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-20T11:47:26" hostname="DESKTOP-V36FRB4" time="0.587">
+<testsuite name="com.CricketAnalyser.IPLAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-20T18:55:11" hostname="DESKTOP-V36FRB4" time="0.566">
   <properties/>
-  <testcase name="givenIPLSheet_whenSortedOnMaximumRunsWithAverage_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.587"/>
+  <testcase name="givenIPLSheet_whenSortedOnAverage_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.566"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

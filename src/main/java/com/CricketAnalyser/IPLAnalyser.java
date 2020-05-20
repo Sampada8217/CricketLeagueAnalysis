@@ -14,123 +14,142 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class IPLAnalyser {
-    List<IPLRunCSVDAO> iplRunDAOS = null;
-    Map<String, IPLRunCSVDAO> iplRunDAOMap = null;
-
+    List<IPLCSVDAO> iplDAOS = null;
+    Map<String, IPLCSVDAO> iplDAOMap=null;
     public IPLAnalyser() {
-        iplRunDAOMap = new HashMap<>();
-        iplRunDAOS = new ArrayList<IPLRunCSVDAO>();
+        iplDAOMap = new HashMap<>();
+        iplDAOS = new ArrayList<>();
     }
 
     public int loadCSVData(String filePath) throws IPLAnalyserException {
         try (Reader reader = Files.newBufferedReader(Paths.get(filePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<IPLRunCSV> csvIterator = csvBuilder
-                    .getCSVFileIterator(reader, IPLRunCSV.class);
+                                             .getCSVFileIterator(reader, IPLRunCSV.class);
             Iterable<IPLRunCSV> csvIterable = () -> csvIterator;
             StreamSupport.stream(csvIterable.spliterator(), false)
                     .forEach(iplRunCSV -> {
-                        iplRunDAOMap.put(iplRunCSV.player, new IPLRunCSVDAO(iplRunCSV));
-                        iplRunDAOS.add(new IPLRunCSVDAO(iplRunCSV));
+                        iplDAOMap.put(iplRunCSV.player, new IPLCSVDAO(iplRunCSV));
+                        iplDAOS.add(new IPLCSVDAO(iplRunCSV));
                     });
 
-            return iplRunDAOMap.size();
+            return this.iplDAOMap.size();
 
         } catch (IOException | CSVBuilderException e) {
             throw new IPLAnalyserException(e.getMessage(),
                     IPLAnalyserException.ExceptionType.IPL_FILE_PROBLEM);
         }
     }
+    public int loadCSVWktsData(String filePath) throws IPLAnalyserException {
+        try (Reader reader = Files.newBufferedReader(Paths.get(filePath))) {
+            ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
+            Iterator<IPLWktsCSV> csvIterator = csvBuilder
+                                              .getCSVFileIterator(reader, IPLWktsCSV.class);
+            Iterable<IPLWktsCSV> csvIterable = () -> csvIterator;
+            StreamSupport.stream(csvIterable.spliterator(), false)
+                         .forEach(iplWktsCSV -> {
+                             iplDAOMap.put(iplWktsCSV.player, new IPLCSVDAO(iplWktsCSV));
+                             iplDAOS.add(new IPLCSVDAO(iplWktsCSV));
+                         });
+
+            return this.iplDAOMap.size();
+        } catch (IOException | CSVBuilderException e) {
+            throw new IPLAnalyserException(e.getMessage(),
+                    IPLAnalyserException.ExceptionType.IPL_FILE_PROBLEM);
+        }
+
+
+    }
+
 
     public String getAverageWiseSortingOnData() throws IPLAnalyserException {
-        if (iplRunDAOMap == null || iplRunDAOMap.size() == 0) {
+        if (iplDAOMap == null || iplDAOMap.size() == 0) {
             throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IPLRunCSVDAO> censusCSVComparator = Comparator.comparing(census -> census.avg);
-        List<IPLRunCSVDAO> iplRunDAOS = iplRunDAOMap.values().stream().collect(Collectors.toList());
+        Comparator<IPLCSVDAO> censusCSVComparator = Comparator.comparing(census -> census.avg);
+        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
         this.sortByDescending(iplRunDAOS, censusCSVComparator);
         String sortedData = new Gson().toJson(iplRunDAOS);
         return sortedData;
 
     }
     public String getSRWiseSortingOnData() throws IPLAnalyserException {
-        if (iplRunDAOMap == null || iplRunDAOMap.size() == 0) {
+        if (iplDAOMap == null || iplDAOMap.size() == 0) {
             throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IPLRunCSVDAO> censusCSVComparator = Comparator.comparing(census -> census.sr);
-        List<IPLRunCSVDAO> iplRunDAOS = iplRunDAOMap.values().stream().collect(Collectors.toList());
+        Comparator<IPLCSVDAO> censusCSVComparator = Comparator.comparing(census -> census.sr);
+        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
         this.sortByDescending(iplRunDAOS, censusCSVComparator);
         String sortedSRData = new Gson().toJson(iplRunDAOS);
         return sortedSRData;
     }
     public String get6sWiseSortingOnData() throws IPLAnalyserException {
-        if (iplRunDAOMap == null || iplRunDAOMap.size() == 0) {
+        if (iplDAOMap == null || iplDAOMap.size() == 0) {
             throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IPLRunCSVDAO> censusCSVComparator = Comparator.comparing(census -> census.six);
-        List<IPLRunCSVDAO> iplRunDAOS = iplRunDAOMap.values().stream().collect(Collectors.toList());
+        Comparator<IPLCSVDAO> censusCSVComparator = Comparator.comparing(census -> census.six);
+        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
         this.sortByDescending(iplRunDAOS, censusCSVComparator);
         String sorted6sData = new Gson().toJson(iplRunDAOS);
         return sorted6sData;
     }
     public String get4sWiseSortingOnData() throws IPLAnalyserException {
-        if (iplRunDAOMap == null || iplRunDAOMap.size() == 0) {
+        if (iplDAOMap == null || iplDAOMap.size() == 0) {
             throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IPLRunCSVDAO> censusCSVComparator = Comparator.comparing(census -> census.four);
-        List<IPLRunCSVDAO> iplRunDAOS = iplRunDAOMap.values().stream().collect(Collectors.toList());
+        Comparator<IPLCSVDAO> censusCSVComparator = Comparator.comparing(census -> census.four);
+        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
         this.sortByDescending(iplRunDAOS, censusCSVComparator);
         String sorted6sData = new Gson().toJson(iplRunDAOS);
         return sorted6sData;
     }
 
     public String getSRWiseSortingWith6sAnd4sOnData() throws IPLAnalyserException {
-        if (iplRunDAOMap == null || iplRunDAOMap.size() == 0) {
+        if (iplDAOMap == null || iplDAOMap.size() == 0) {
             throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IPLRunCSVDAO> sortSRComparator = Comparator.comparing(census -> census.sr);
-        Comparator<IPLRunCSVDAO> sort6sComparator = sortSRComparator.thenComparing(census -> census.sr);
-        Comparator<IPLRunCSVDAO> sort4sCompartor=sort6sComparator.thenComparing(census->census.four);
-        List<IPLRunCSVDAO> iplRunDAOS = iplRunDAOMap.values().stream().collect(Collectors.toList());
+        Comparator<IPLCSVDAO> sortSRComparator = Comparator.comparing(census -> census.sr);
+        Comparator<IPLCSVDAO> sort6sComparator = sortSRComparator.thenComparing(census -> census.sr);
+        Comparator<IPLCSVDAO> sort4sCompartor=sort6sComparator.thenComparing(census->census.four);
+        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
         this.sortByDescending(iplRunDAOS, sort4sCompartor);
         String sorted4sData = new Gson().toJson(iplRunDAOS);
         return sorted4sData;
     }
     public String getAverageWiseSortingWithSROnData() throws IPLAnalyserException {
-        if (iplRunDAOMap == null || iplRunDAOMap.size() == 0) {
+        if (iplDAOMap == null || iplDAOMap.size() == 0) {
             throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IPLRunCSVDAO> sortAvgComparator = Comparator.comparing(census -> census.avg);
-        Comparator<IPLRunCSVDAO> sortSRComparator = sortAvgComparator.thenComparing(census -> census.sr);
-        List<IPLRunCSVDAO> iplRunDAOS = iplRunDAOMap.values().stream().collect(Collectors.toList());
+        Comparator<IPLCSVDAO> sortAvgComparator = Comparator.comparing(census -> census.avg);
+        Comparator<IPLCSVDAO> sortSRComparator = sortAvgComparator.thenComparing(census -> census.sr);
+        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
         this.sortByDescending(iplRunDAOS, sortAvgComparator);
         String sortedAvgData = new Gson().toJson(iplRunDAOS);
         return sortedAvgData;
 
     }
     public String getRunsWiseSortingWithAvgOnData() throws IPLAnalyserException {
-        if (iplRunDAOMap == null || iplRunDAOMap.size() == 0) {
+        if (iplDAOMap == null || iplDAOMap.size() == 0) {
             throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
-        Comparator<IPLRunCSVDAO> sortRunsComparator = Comparator.comparing(census -> census.runs);
-        Comparator<IPLRunCSVDAO> sortAvgComparator = sortRunsComparator.thenComparing(census -> census.avg);
-        List<IPLRunCSVDAO> iplRunDAOS = iplRunDAOMap.values().stream().collect(Collectors.toList());
+        Comparator<IPLCSVDAO> sortRunsComparator = Comparator.comparing(census -> census.runs);
+        Comparator<IPLCSVDAO> sortAvgComparator = sortRunsComparator.thenComparing(census -> census.avg);
+        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
         this.sortByDescending(iplRunDAOS, sortAvgComparator);
         String sortedSRData = new Gson().toJson(iplRunDAOS);
         return sortedSRData;
     }
-    private void sortByDescending(List<IPLRunCSVDAO> iplRunDAOS,Comparator<IPLRunCSVDAO> censusComparator) {
+    private void sortByDescending(List<IPLCSVDAO> iplRunDAOS, Comparator<IPLCSVDAO> censusComparator) {
         for (int i = 0; i < iplRunDAOS.size() - 1; i++) {
             for (int j = 0; j < iplRunDAOS.size() - i - 1; j++) {
-                IPLRunCSVDAO census1 = iplRunDAOS.get(j);
-                IPLRunCSVDAO census2 = iplRunDAOS.get(j + 1);
+                IPLCSVDAO census1 = iplRunDAOS.get(j);
+                IPLCSVDAO census2 = iplRunDAOS.get(j + 1);
                 if (censusComparator.compare(census1, census2) < 0) {
                     iplRunDAOS.set(j, census2);
                     iplRunDAOS.set(j + 1, census1);
                 }
             }
         }
-
     }
 }
 

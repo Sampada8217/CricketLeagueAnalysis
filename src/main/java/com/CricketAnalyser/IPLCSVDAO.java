@@ -1,6 +1,6 @@
 package com.CricketAnalyser;
 
-public class IPLRunCSVDAO {
+public class IPLCSVDAO {
     public int pos;
     public String player;
     public int mat;
@@ -15,9 +15,14 @@ public class IPLRunCSVDAO {
     public int fifty;
     public int four;
     public int six;
+    public double ov;
+    public int wkts;
+    public int bbi;
+    public double econ;
+    public int fourW;
+    public int fiveW;
 
-
-    public IPLRunCSVDAO(IPLRunCSV iplRunCSV) {
+    public IPLCSVDAO(IPLRunCSV iplRunCSV) {
         pos= iplRunCSV.pos;
         player =iplRunCSV.player;
         mat = iplRunCSV.mat;
@@ -35,4 +40,22 @@ public class IPLRunCSVDAO {
         six=iplRunCSV.six;
 
     }
+
+
+    public IPLCSVDAO(IPLWktsCSV iplWktsCSV) {
+        pos= iplWktsCSV.pos;
+        player =iplWktsCSV.player;
+        mat = iplWktsCSV.mat;
+        inns=iplWktsCSV.inns;
+        ov=iplWktsCSV.ov;
+        runs= iplWktsCSV.runs;
+        wkts= iplWktsCSV.wkts;
+        bbi=iplWktsCSV.bbi;
+        avg=iplWktsCSV.avg;
+        econ=iplWktsCSV.econ;
+        sr = iplWktsCSV.sr;
+        fourW=iplWktsCSV.fourW;
+        fiveW=iplWktsCSV.fiveW;
+    }
 }
+

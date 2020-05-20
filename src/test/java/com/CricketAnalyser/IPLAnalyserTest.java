@@ -8,7 +8,8 @@ import org.junit.rules.ExpectedException;
 public class IPLAnalyserTest {
     private static final String IPL_FACT_SHEET_FILE_PATH = "./src/test/resources/IPL2019FactsheetMostRuns.csv";
     private static final String IPL_WRONG_FILE_PATH = "./src/main/resources/IPL2019FactsheetMostRuns";
-
+    private static final String IPL_FACT_SHEET_WICKETS_FILE_PATH="./src/test/resources/IPL2019FactsheetMostWkts.csv";
+    private static final String IPL_FACT_SHEET_WICKET_WRONG_FILE="./src/main/resources/IPL2019FactsheetMostWkts.csv";
     @Test
     public void givenIPLSheet_withCSVFile_shouldReturnCorrectRecords() {
         try {
@@ -20,7 +21,7 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenIndiaCensusData_WithWrongFile_ShouldThrowException() {
+    public void givenIPLSheet_WithWrongFile_ShouldThrowException() {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser();
             ExpectedException exceptionRule = ExpectedException.none();
@@ -113,6 +114,28 @@ public class IPLAnalyserTest {
             Assert.assertEquals("David Warner ",iplRunCSV[0].player);
         } catch (IPLAnalyserException e) { }
     }
+
+    @Test
+    public void givenIPLWktsheet_withCSVFile_shouldReturnCorrectRecords() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            int numOfRecords = iplAnalyser.loadCSVWktsData(IPL_FACT_SHEET_WICKETS_FILE_PATH);
+            Assert.assertEquals(100, numOfRecords);
+        } catch (IPLAnalyserException e) {
+        }
+    }
+    @Test
+    public void givenIPLWktsSheet_WithWrongFile_ShouldThrowException() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            ExpectedException exceptionRule = ExpectedException.none();
+            exceptionRule.expect(IPLAnalyserException.class);
+            iplAnalyser.loadCSVData(IPL_FACT_SHEET_WICKET_WRONG_FILE);
+        } catch (IPLAnalyserException e) {
+            Assert.assertEquals(IPLAnalyserException.ExceptionType.IPL_FILE_PROBLEM, e.type);
+        }
+    }
+
 }
 
 

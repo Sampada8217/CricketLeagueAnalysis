@@ -15,7 +15,8 @@ public class IPLAnalyserTest {
             IPLAnalyser iplAnalyser = new IPLAnalyser();
             int numOfRecords = iplAnalyser.loadCSVData(IPL_FACT_SHEET_FILE_PATH);
             Assert.assertEquals(100, numOfRecords);
-        } catch (IPLAnalyserException e) {}
+        } catch (IPLAnalyserException e) {
+        }
     }
 
     @Test
@@ -38,7 +39,8 @@ public class IPLAnalyserTest {
             String sortedData = iplAnalyser.getAverageWiseSortingOnData();
             IPLRunCSV[] iplRunCSV = new Gson().fromJson(sortedData, IPLRunCSV[].class);
             Assert.assertEquals("MS Dhoni", iplRunCSV[0].player);
-        } catch (IPLAnalyserException e) { }
+        } catch (IPLAnalyserException e) {
+        }
     }
 
     @Test
@@ -49,9 +51,30 @@ public class IPLAnalyserTest {
             String sortedSRData = iplAnalyser.getSRWiseSortingOnData();
             IPLRunCSV[] iplRunCSV = new Gson().fromJson(sortedSRData, IPLRunCSV[].class);
             Assert.assertEquals("Ishant Sharma", iplRunCSV[0].player);
-        } catch (IPLAnalyserException e) { }
+        } catch (IPLAnalyserException e) {
+        }
     }
 
+    @Test
+    public void givenIPLSheet_whenSortedOn6s_shouldReturnSortedResult() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            iplAnalyser.loadCSVData(IPL_FACT_SHEET_FILE_PATH);
+            String sorted6sData = iplAnalyser.get6sWiseSortingOnData();
+            IPLRunCSV[] iplRunCSV = new Gson().fromJson(sorted6sData, IPLRunCSV[].class);
+            Assert.assertEquals("Andre Russell", iplRunCSV[0].player);
+        } catch (IPLAnalyserException e) { }
+    }
+    @Test
+    public void givenIPLSheet_whenSortedOn4s_shouldReturnSortedResult() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            iplAnalyser.loadCSVData(IPL_FACT_SHEET_FILE_PATH);
+            String sorted4sData = iplAnalyser.get4sWiseSortingOnData();
+            IPLRunCSV[] iplRunCSV = new Gson().fromJson(sorted4sData, IPLRunCSV[].class);
+            Assert.assertEquals("Shikhar Dhawan", iplRunCSV[0].player);
+        } catch (IPLAnalyserException e) { }
+    }
 }
 
 

@@ -53,7 +53,6 @@ public class IPLAnalyser {
         return sortedData;
 
     }
-
     public String getSRWiseSortingOnData() throws IPLAnalyserException {
         if (iplRunDAOMap == null || iplRunDAOMap.size() == 0) {
             throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
@@ -64,6 +63,27 @@ public class IPLAnalyser {
         String sortedSRData = new Gson().toJson(iplRunDAOS);
         return sortedSRData;
     }
+    public String get6sWiseSortingOnData() throws IPLAnalyserException {
+        if (iplRunDAOMap == null || iplRunDAOMap.size() == 0) {
+            throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<IPLRunCSVDAO> censusCSVComparator = Comparator.comparing(census -> census.six);
+        List<IPLRunCSVDAO> iplRunDAOS = iplRunDAOMap.values().stream().collect(Collectors.toList());
+        this.sortByDescending(iplRunDAOS, censusCSVComparator);
+        String sorted6sData = new Gson().toJson(iplRunDAOS);
+        return sorted6sData;
+    }
+    public String get4sWiseSortingOnData() throws IPLAnalyserException {
+        if (iplRunDAOMap == null || iplRunDAOMap.size() == 0) {
+            throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<IPLRunCSVDAO> censusCSVComparator = Comparator.comparing(census -> census.four);
+        List<IPLRunCSVDAO> iplRunDAOS = iplRunDAOMap.values().stream().collect(Collectors.toList());
+        this.sortByDescending(iplRunDAOS, censusCSVComparator);
+        String sorted6sData = new Gson().toJson(iplRunDAOS);
+        return sorted6sData;
+    }
+
     private void sortByDescending(List<IPLRunCSVDAO> iplRunDAOS,Comparator<IPLRunCSVDAO> censusComparator) {
         for (int i = 0; i < iplRunDAOS.size() - 1; i++) {
             for (int j = 0; j < iplRunDAOS.size() - i - 1; j++) {

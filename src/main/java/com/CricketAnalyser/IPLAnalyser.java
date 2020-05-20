@@ -103,10 +103,21 @@ public class IPLAnalyser {
         Comparator<IPLRunCSVDAO> sortAvgComparator = Comparator.comparing(census -> census.avg);
         Comparator<IPLRunCSVDAO> sortSRComparator = sortAvgComparator.thenComparing(census -> census.sr);
         List<IPLRunCSVDAO> iplRunDAOS = iplRunDAOMap.values().stream().collect(Collectors.toList());
-        this.sortByDescending(iplRunDAOS, sortSRComparator);
+        this.sortByDescending(iplRunDAOS, sortAvgComparator);
+        String sortedAvgData = new Gson().toJson(iplRunDAOS);
+        return sortedAvgData;
+
+    }
+    public String getRunsWiseSortingWithAvgOnData() throws IPLAnalyserException {
+        if (iplRunDAOMap == null || iplRunDAOMap.size() == 0) {
+            throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<IPLRunCSVDAO> sortRunsComparator = Comparator.comparing(census -> census.runs);
+        Comparator<IPLRunCSVDAO> sortAvgComparator = sortRunsComparator.thenComparing(census -> census.avg);
+        List<IPLRunCSVDAO> iplRunDAOS = iplRunDAOMap.values().stream().collect(Collectors.toList());
+        this.sortByDescending(iplRunDAOS, sortAvgComparator);
         String sortedSRData = new Gson().toJson(iplRunDAOS);
         return sortedSRData;
-
     }
     private void sortByDescending(List<IPLRunCSVDAO> iplRunDAOS,Comparator<IPLRunCSVDAO> censusComparator) {
         for (int i = 0; i < iplRunDAOS.size() - 1; i++) {

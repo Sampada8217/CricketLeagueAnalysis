@@ -150,6 +150,16 @@ public class IPLAnalyserTest {
             Assert.assertEquals("Krishnappa Gowtham", iplWktsCSV[0].player);
         } catch (IPLAnalyserException e) { }
     }
+    @Test
+    public void givenIPLWicketsSheet_whenSortedOnBowlingStrikingRates_shouldReturnSortedResult() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            iplAnalyser.loadCSVWktsData(IPL_FACT_SHEET_WICKETS_FILE_PATH);
+            String sortedBowlingSRData = iplAnalyser.getBowlingSRWiseSortingOnData();
+            IPLRunCSV[] iplRunCSV = new Gson().fromJson(sortedBowlingSRData, IPLRunCSV[].class);
+            Assert.assertEquals("Krishnappa Gowtham", iplRunCSV[0].player);
+        } catch (IPLAnalyserException e) { }
+    }
 }
 
 

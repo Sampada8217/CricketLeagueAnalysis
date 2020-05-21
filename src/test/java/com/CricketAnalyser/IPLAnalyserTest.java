@@ -201,6 +201,17 @@ public class IPLAnalyserTest {
             Assert.assertEquals("Imran Tahir", iplWktsCSV[0].player);
         } catch (IPLAnalyserException e) { }
     }
+    @Test
+    public void givenIPLWicketsSheet_whenSortedOnBattingAndBowlingAvg_shouldReturnSortedResult() {
+        try {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+           ;iplAnalyser.loadCSVData(IPL_FACT_SHEET_FILE_PATH);
+            iplAnalyser.loadCSVWktsData(IPL_FACT_SHEET_WICKETS_FILE_PATH);
+            String sortedBattingAndBowlingAvg = iplAnalyser.getSortingOnBattingAndBowlingAvgOnData();
+            IPLWktsCSV[] iplWktsCSV = new Gson().fromJson(sortedBattingAndBowlingAvg, IPLWktsCSV[].class);
+            Assert.assertEquals("Krishnappa Gowtham", iplWktsCSV[0].player);
+        } catch (IPLAnalyserException e) { }
+    }
 }
 
 

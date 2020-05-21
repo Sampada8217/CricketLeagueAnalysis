@@ -26,7 +26,7 @@ public class IPLAnalyser {
         try (Reader reader = Files.newBufferedReader(Paths.get(filePath))) {
             ICSVBuilder csvBuilder = CSVBuilderFactory.createCSVBuilder();
             Iterator<IPLRunCSV> csvIterator = csvBuilder
-                    .getCSVFileIterator(reader, IPLRunCSV.class);
+                                             .getCSVFileIterator(reader, IPLRunCSV.class);
             Iterable<IPLRunCSV> csvIterable = () -> csvIterator;
             StreamSupport.stream(csvIterable.spliterator(), false)
                     .forEach(iplRunCSV -> {
@@ -59,7 +59,6 @@ public class IPLAnalyser {
             throw new IPLAnalyserException(e.getMessage(),
                     IPLAnalyserException.ExceptionType.IPL_FILE_PROBLEM);
         }
-
 
     }
 
@@ -181,6 +180,18 @@ public class IPLAnalyser {
         return sortedAvgData;
 
     }
+    public String getSortingOnBattingAndBowlingAvgOnData() throws IPLAnalyserException {
+        if (iplDAOMap == null || iplDAOMap.size() == 0) {
+            throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<IPLCSVDAO> sortBattingAvgComparator = Comparator.comparing(census -> census.avg);
+        Comparator<IPLCSVDAO> sortBowlingAvgComparator = sortBattingAvgComparator.thenComparing(census -> census.avg);
+        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
+        this.sortByDescending(iplRunDAOS, sortBowlingAvgComparator);
+        String sortedAvgData = new Gson().toJson(iplRunDAOS);
+        return sortedAvgData;
+
+    }
 
     private void sortByDescending(List<IPLCSVDAO> iplRunDAOS, Comparator<IPLCSVDAO> censusComparator) {
         for (int i = 0; i < iplRunDAOS.size() - 1; i++) {
@@ -194,6 +205,7 @@ public class IPLAnalyser {
             }
         }
     }
+
 
 }
 

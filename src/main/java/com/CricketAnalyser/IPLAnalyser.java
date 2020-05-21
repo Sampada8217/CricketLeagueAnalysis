@@ -192,6 +192,18 @@ public class IPLAnalyser {
         return sortedAvgData;
 
     }
+    public String getSortingOnMostRunsAndWicketsOnData() throws IPLAnalyserException {
+        if (iplDAOMap == null || iplDAOMap.size() == 0) {
+            throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
+        }
+        Comparator<IPLCSVDAO> sortRunsComparator = Comparator.comparing(census -> census.runs);
+        Comparator<IPLCSVDAO> sortWktsComparator = sortRunsComparator.thenComparing(census -> census.wkts);
+        List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values().stream().collect(Collectors.toList());
+        this.sortByDescending(iplRunDAOS, sortWktsComparator);
+        String sortedData = new Gson().toJson(iplRunDAOS);
+        return sortedData;
+
+    }
 
     private void sortByDescending(List<IPLCSVDAO> iplRunDAOS, Comparator<IPLCSVDAO> censusComparator) {
         for (int i = 0; i < iplRunDAOS.size() - 1; i++) {
@@ -205,8 +217,6 @@ public class IPLAnalyser {
             }
         }
     }
-
-
 }
 
 

@@ -222,11 +222,11 @@ public class IPLAnalyserTest {
             ;iplAnalyser.loadCSVData(IPL_FACT_SHEET_FILE_PATH);
             iplAnalyser.loadCSVWktsData(IPL_FACT_SHEET_WICKETS_FILE_PATH);
             String sortedBattingAndBowlingAvg = iplAnalyser.getSortingOnMostRunsAndWicketsOnData();
+            IPLRunCSV[] iplRunCSV=new Gson().fromJson(sortedBattingAndBowlingAvg,IPLRunCSV[].class);
             IPLWktsCSV[] iplWktsCSV = new Gson().fromJson(sortedBattingAndBowlingAvg, IPLWktsCSV[].class);
             Assert.assertEquals("David Warner ", iplWktsCSV[0].player);
         } catch (IPLAnalyserException e) { }
     }
-
 }
 
 

@@ -201,8 +201,10 @@ public class IPLAnalyserTest {
             Assert.assertEquals("Imran Tahir", iplWktsCSV[0].player);
         } catch (IPLAnalyserException e) { }
     }
+
+
     @Test
-    public void givenIPLWicketsSheet_whenSortedOnBattingAndBowlingAvg_shouldReturnSortedResult() {
+    public void givenIPLWicketsSheet_whenSortedOnBattingAvgAndBowlingAvg_shouldReturnSortedResult() {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser();
            ;iplAnalyser.loadCSVData(IPL_FACT_SHEET_FILE_PATH);

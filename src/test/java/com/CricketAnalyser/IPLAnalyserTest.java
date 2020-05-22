@@ -211,7 +211,7 @@ public class IPLAnalyserTest {
     public void givenIPLWicketsSheet_whenSortedOnBattingAvgAndBowlingAvg_shouldReturnSortedResult() {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser();
-            iplAnalyser.loadCSVData(IPLAnalyser.IPLSheet.WKTS,IPL_FACT_SHEET_WICKETS_FILE_PATH);
+            iplAnalyser.loadCSVData(IPLAnalyser.IPLSheet.WKTS,IPL_FACT_SHEET_WICKETS_FILE_PATH,IPL_FACT_SHEET_FILE_PATH);
             String sortedBattingAndBowlingAvg = iplAnalyser.getSortingOnBattingAndBowlingAvgOnData();
             IPLWktsCSV[] iplWktsCSV = new Gson().fromJson(sortedBattingAndBowlingAvg, IPLWktsCSV[].class);
             Assert.assertEquals("Krishnappa Gowtham", iplWktsCSV[0].player);
@@ -222,7 +222,7 @@ public class IPLAnalyserTest {
     public void givenIPLWicketsSheet_whenSortedOnMostRunsAndWickets_shouldReturnAllRounderCricketer() {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(IPLAnalyser.IPLSheet.WKTS);
-            iplAnalyser.loadCSVData(IPLAnalyser.IPLSheet.WKTS,IPL_FACT_SHEET_FILE_PATH);
+            iplAnalyser.loadCSVData(IPLAnalyser.IPLSheet.WKTS,IPL_FACT_SHEET_FILE_PATH,IPL_FACT_SHEET_WICKETS_FILE_PATH);
             String sortedBattingAndBowlingAvg = iplAnalyser.getSortingOnMostRunsAndWicketsOnData();
             IPLWktsCSV[] iplWktsCSV = new Gson().fromJson(sortedBattingAndBowlingAvg, IPLWktsCSV[].class);
             Assert.assertEquals("David Warner ", iplWktsCSV[0].player);

@@ -28,14 +28,14 @@ public class IPLAnalyser {
 
     }
 
-    public  String  getSortedFunction(Comparator<IPLCSVDAO> iplcsvdaoComparator) throws IPLAnalyserException {
+    public  String  getSortedFunction(Comparator<IPLCSVDAO> iplCsvDaoComparator) throws IPLAnalyserException {
         if (iplDAOMap == null || iplDAOMap.size() == 0) {
             throw new IPLAnalyserException("No Census Data", IPLAnalyserException.ExceptionType.NO_CENSUS_DATA);
         }
         List<IPLCSVDAO> iplRunDAOS = iplDAOMap.values()
-                .stream()
-                .collect(Collectors.toList());
-        this.sortByDescending(iplRunDAOS, iplcsvdaoComparator);
+                                              .stream()
+                                              .collect(Collectors.toList());
+        this.sortByDescending(iplRunDAOS, iplCsvDaoComparator);
         String sortedAvgData = new Gson().toJson(iplRunDAOS);
         return sortedAvgData;
     }
@@ -67,8 +67,8 @@ public class IPLAnalyser {
     public String getSRWiseSortingWith6sAnd4sOnData() throws IPLAnalyserException {
         Comparator<IPLCSVDAO> sortSRComparator = Comparator.comparing(ipl -> ipl.sr);
         Comparator<IPLCSVDAO> sort6sComparator = sortSRComparator.thenComparing(census -> census.sr);
-        Comparator<IPLCSVDAO> sort4sCompartor = sort6sComparator.thenComparing(census -> census.four);
-        return getSortedFunction(sort4sCompartor);
+        Comparator<IPLCSVDAO> sort4sComparator = sort6sComparator.thenComparing(census -> census.four);
+        return getSortedFunction(sort4sComparator);
     }
 
     public String getAverageWiseSortingWithSROnData() throws IPLAnalyserException {

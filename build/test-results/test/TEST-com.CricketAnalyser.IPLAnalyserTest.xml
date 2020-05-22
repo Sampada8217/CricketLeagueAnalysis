@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.CricketAnalyser.IPLAnalyserTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2020-05-22T11:29:00" hostname="DESKTOP-V36FRB4" time="4.003">
+<testsuite name="com.CricketAnalyser.IPLAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-22T16:01:01" hostname="DESKTOP-V36FRB4" time="0.709">
   <properties/>
-  <testcase name="givenIPLWktsheet_withCSVFile_shouldReturnCorrectRecords" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.556"/>
-  <testcase name="givenIPLWicketsSheet_whenSortedOnBattingAvgAndBowlingAvg_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.324"/>
-  <testcase name="givenIPLWktsSheet_withWrongFile_ShouldThrowException" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.008"/>
-  <testcase name="givenIPLSheet_whenSortedOn6s_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.307"/>
-  <testcase name="givenIPLWicketsSheet_whenSortedOnBowlingEconomyRate_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.212"/>
-  <testcase name="givenIPLSheet_withCSVFile_shouldReturnCorrectRecords" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.234"/>
-  <testcase name="givenIPLWicketsSheet_whenSortedOnMostRunsAndWickets_shouldReturnAllRounderCricketer" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.118"/>
-  <testcase name="givenIPLWicketsSheet_whenSortedOnSRWith5wAnd4w_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.213"/>
-  <testcase name="givenIPLSheet_WithWrongFile_ShouldThrowException" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.001"/>
-  <testcase name="givenIPLSheet_whenSortedOnStrikingRateWith6sAnd4s_shouldReturnBestCricketerName" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.274"/>
-  <testcase name="givenIPLWicketsSheet_whenSortedOnBowlingStrikingRates_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.232"/>
-  <testcase name="givenIPLSheet_whenSortedOnAverage_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.21"/>
-  <testcase name="givenIPLSheet_whenSortedOnAveragesWithStrikingRate_shouldReturnBestCricketerName" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.192"/>
-  <testcase name="givenIPLWicketsSheet_whenSortedOnAvgWithSR_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.178"/>
-  <testcase name="givenIPLSheet_whenSortedOnMaximumRunsWithAverage_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.207"/>
-  <testcase name="givenIPLWicketsSheet_whenSortedOnWicketsWithAvg_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.174"/>
-  <testcase name="givenIPLSheet_whenSortedOn4s_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.192"/>
-  <testcase name="givenIPLWicketsSheet_withSortingOnBowlingAverages_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.161"/>
-  <testcase name="givenIPLSheet_whenSortedOnStrikingRates_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.201"/>
+  <testcase name="givenIPLWicketsSheet_whenSortedOnBattingAvgAndBowlingAvg_shouldReturnSortedResult" classname="com.CricketAnalyser.IPLAnalyserTest" time="0.709"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

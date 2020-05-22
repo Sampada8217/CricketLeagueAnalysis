@@ -48,6 +48,9 @@ public class IPLWktsCSV {
 
     }
 
+    public IPLWktsCSV(int pos, String player, int runs, int wkts, double avg, double sr, int fourW, int fiveW) {
+    }
+
 
     @Override
     public String toString() {

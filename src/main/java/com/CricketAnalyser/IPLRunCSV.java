@@ -7,7 +7,7 @@ public class IPLRunCSV {
     @CsvBindByName(column = "POS")
     public int pos;
 
-    @CsvBindByName(column="PLAYER", required = true)
+    @CsvBindByName(column="PLAYER")
     public String player;
 
     @CsvBindByName(column = "Mat")
@@ -48,6 +48,9 @@ public class IPLRunCSV {
 
     public IPLRunCSV() {
 
+    }
+
+    public IPLRunCSV(int pos, String player, int runs, double avg, double sr, int six, int four) {
     }
 
 

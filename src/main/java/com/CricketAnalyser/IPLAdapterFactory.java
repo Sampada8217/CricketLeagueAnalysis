@@ -9,6 +9,6 @@ public class IPLAdapterFactory {
         else
             if(iplSheet.equals(IPLAnalyser.IPLSheet.RUNS))
             return new IPLRunAdapter().loadCSVData(filePath);
-        throw new IPLAnalyserException("Unknown Country",IPLAnalyserException.ExceptionType.INVALID_IPL_SHEET);
+        throw new IPLAnalyserException("Unknown IPLSheet",IPLAnalyserException.ExceptionType.INVALID_IPL_SHEET);
     }
 }

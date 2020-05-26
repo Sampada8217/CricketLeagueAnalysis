@@ -34,13 +34,13 @@ public class DataComparator {
         fieldComparator.put(DataFields.FOURS, sort4sIplComparator);
 
         Comparator<IPLCSVDAO> sortSRComparator = Comparator.comparing(ipl -> ipl.sr);
-        Comparator<IPLCSVDAO> sort6sComparator = sortSRComparator.thenComparing(ipl -> ipl.sr);
+        Comparator<IPLCSVDAO> sort6sComparator = sortSRComparator.thenComparing(ipl -> ipl.six);
         Comparator<IPLCSVDAO> sort4sComparator = sort6sComparator.thenComparing(ipl -> ipl.four);
         fieldComparator.put(DataFields.SR_WITH_SIXES_AND_FOURS, sort4sComparator);
 
         Comparator<IPLCSVDAO> sortAvgComparator = Comparator.comparing(ipl -> ipl.avg);
-        Comparator<IPLCSVDAO> sortSRBattingomparator = sortAvgComparator.thenComparing(census -> census.sr);
-        fieldComparator.put(DataFields.AVG_WITH_SR, sortSRBattingomparator);
+        Comparator<IPLCSVDAO> sortSRBattingComparator = sortAvgComparator.thenComparing(ipl-> ipl.sr);
+        fieldComparator.put(DataFields.AVG_WITH_SR, sortSRBattingComparator);
 
         Comparator<IPLCSVDAO> sortRunsComparator = Comparator.comparing(ipl -> ipl.runs);
         Comparator<IPLCSVDAO> sortRunWithAvgComparator = sortRunsComparator.thenComparing(ipl -> ipl.avg);
@@ -60,14 +60,8 @@ public class DataComparator {
         fieldComparator.put(DataFields.BOWLING_AVG_WITH_SR, sortBowlingSRComparator);
 
 
-
-        sortSRComparator = Comparator.comparing(ipl -> ipl.sr);
-        sort6sComparator = sortSRComparator.thenComparing(ipl -> ipl.fiveW);
-        Comparator<IPLCSVDAO> sort4sCompartor = sort6sComparator.thenComparing(ipl -> ipl.fourW);
-        fieldComparator.put(DataFields.SR_WITH_SIXES_AND_FOURS, sort4sCompartor);
-
-        sortSRComparator = Comparator.comparing(ipl -> ipl.sr);
-        Comparator<IPLCSVDAO> sort4wComparator = sortSRComparator.thenComparing(ipl -> ipl.fourW);
+        Comparator<IPLCSVDAO> sortStrikingComparator = Comparator.comparing(ipl -> ipl.sr);
+        Comparator<IPLCSVDAO> sort4wComparator = sortStrikingComparator.thenComparing(ipl -> ipl.fourW);
         Comparator<IPLCSVDAO> sort5wComparator = sort4wComparator.thenComparing(ipl -> ipl.fiveW);
         fieldComparator.put(DataFields.SR_WITH_FIVE_AND_FOUR, sort5wComparator);
 

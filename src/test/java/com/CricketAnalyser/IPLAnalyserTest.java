@@ -41,7 +41,7 @@ public class IPLAnalyserTest {
             iplAnalyser.loadCSVData(IPLAnalyser.IPLSheet.RUNS,IPL_FACT_SHEET_FILE_PATH);
             String sortData=iplAnalyser.getSortedDataByField(DataComparator.DataFields.BATTING_AVERAGE);
             IPLRunCSV[] iplRunCSVS=new Gson().fromJson(sortData,IPLRunCSV[].class);
-            Assert.assertEquals("Ishant Sharma",iplRunCSVS[0].player);
+            Assert.assertEquals("MS Dhoni",iplRunCSVS[iplRunCSVS.length-1].player);
         }catch (IPLAnalyserException e){ }
     }
 
@@ -121,7 +121,7 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenIPLWktsheet_withCSVFile_shouldReturnCorrectRecords() {
+    public void givenIPLWicketsSheet_withCSVFile_shouldReturnCorrectRecords() {
         try {
             IPLAnalyser iplAnalyser = new IPLAnalyser(IPLAnalyser.IPLSheet.RUNS);
             int numOfRecords = iplAnalyser.loadCSVData(IPLAnalyser.IPLSheet.WKTS,IPL_FACT_SHEET_WICKETS_FILE_PATH);

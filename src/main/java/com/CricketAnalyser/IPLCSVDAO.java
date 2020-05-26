@@ -58,11 +58,5 @@ public class IPLCSVDAO {
         fiveW=iplWktsCSV.fiveW;
     }
 
-    public Object getCensusDTO(IPLAnalyser.IPLSheet iplSheet) {
-        if(iplSheet.equals(IPLAnalyser.IPLSheet.RUNS))
-            return new IPLRunCSV(pos,player,runs,avg,sr,six,four);
-        return  new IPLWktsCSV(pos,player,runs,wkts,avg,sr,fourW,fiveW);
-
-    }
 }
 
